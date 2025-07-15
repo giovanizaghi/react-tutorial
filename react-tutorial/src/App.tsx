@@ -5,34 +5,34 @@ import { useTheme } from './contexts/ThemeContext';
 import "./App.css";
 import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
 import { decrement, increment, incrementByAmount } from './features/counterSlice';
+import { fetchUsers } from './features/usersSlice';
 
 function App() {
   const { theme, toggleTheme } = useTheme();
-
-  const [users, setUsers] = useState<Array<any>>([]);
-
-  //redux
-  const count = useAppSelector(state => state.counter.value);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  //redux - counter
+  const count = useAppSelector(state => state.counter.value);
 
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(data => setUsers(data));
-
-  }, []);
+  //redux - users
+  const {users, loading, error} = useAppSelector(state => state.users);
 
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
+
+  useEffect(()=>{
+    
+    dispatch(fetchUsers());
+
+  }, [dispatch])
 
   return (
     <div className={theme}>
       <h1>"Need to know" Tutorial</h1>
       <button onClick={toggleTheme}>Toggle Theme</button>
       <Welcome name="Giovani!" />
-      <UserList users={users} />
+      <UserList users={users} loading={loading} error={error} />
 
       <div>
         <h2>
