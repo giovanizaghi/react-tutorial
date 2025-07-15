@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import Welcome from './components/Welcome'
+import UserList from './components/UserList';
+import { useTheme } from './contexts/ThemeContext';
+import "./App.css";
+import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
+import { decrement, increment, incrementByAmount } from './features/counterSlice';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { theme, toggleTheme } = useTheme();
+
+  const [users, setUsers] = useState<Array<any>>([]);
+
+  //redux
+  const count = useAppSelector(state => state.counter.value);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => setUsers(data));
+
+  }, []);
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
   return (
-    <>
+    <div className={theme}>
+      <h1>"Need to know" Tutorial</h1>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+      <Welcome name="Giovani!" />
+      <UserList users={users} />
+
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h2>
+          Counter (Redux) 
+        </h2>
+        <p>Current count: {count}</p>
+        <button onClick={() => dispatch(increment())}>Increment</button>
+        <button onClick={() => dispatch(decrement())}>Decrement</button>
+        <button onClick={() => dispatch(incrementByAmount(5))}>+5</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+    </div>
   )
 }
 

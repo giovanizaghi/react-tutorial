@@ -1,0 +1,22 @@
+body.dark {
+    background-color: #222;
+    color: #fff;
+}
+
+body.dark h1 {
+    color: #fff;
+}
+
+body.light {
+    background-color: #fff;
+    color: #222;
+}
+
+body.light h1 {
+    color: #222;
+}
+
+/* Optional: transition for smooth theme toggle */
+body.dark, body.light {
+    transition: background-color 0.3s, color 0.3s;
+}
