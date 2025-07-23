@@ -1,44 +1,30 @@
-import type { User } from "../features/usersSlice";
+import type { UsersState } from "../features/usersSlice";
 
-interface UserListProps {
-  users: User[],
-  loading: boolean,
-  error?: string
-}
+const UserList: React.FC<UsersState> = ({users, loading, error}) => {
 
-const UserList: React.FC<UserListProps> = ({
-  users,
-  loading,
-  error
-}) => {
-  if(loading){
-    return <p>Loading users</p>
-  }
-  if (!users || users.length === 0) {
-    return <p>No users found</p>
-  }
+    if(loading){
+        return <p>Loading...</p>
+    }
 
-  if(error){
-    return <p>Error to found users: {error}</p>
-  }
+    if(error){
+        return <p>An error ocurred loading users</p>
+    }
 
-  return (
-    <>
-      {
-        users.length === 0 ? <p>Loading...</p> :
-          (
-            <ul>
-              {
-                users.map((user: any) => (
-                  <li key={user.id}>{user.name} ({user.email})</li>
-                ))
-              }
-            </ul>
-          )
-
-      }
-    </>
-  )
+    return (
+        <>
+            <h2>Users</h2>
+            {
+                users.length === 0 ? <p>Loading...</p> :
+                    <ul>
+                        {
+                            users.map(user => (
+                                <li key={user.id}>{user.name} ({user.email.toLocaleLowerCase()})</li>
+                            ))
+                        }
+                    </ul>
+            }
+        </>
+    );
 }
 
 export default UserList;

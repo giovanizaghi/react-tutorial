@@ -1,14 +1,14 @@
 import { Provider } from "react-redux";
-import UserList from "./UserList";
 import { store } from "../store/store";
-import { render, screen } from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
+import UserList from "./UserList";
 
-
-test('renders loading message when users are waiting the promise', () =>{
+test('renders loading message when users are empty',() =>{
     render(
         <Provider store={store}>
-            <UserList users={[]} loading={true} />
+            <UserList users={[]} loading={false} />
         </Provider>
     );
-    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
+
+    expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
 });

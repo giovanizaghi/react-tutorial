@@ -1,4 +1,4 @@
-import counterReducer, { increment, decrement, incrementByAmount } from './counterSlice';
+import counterReducer, { decrement, increment, incrementByAmount } from "./counterSlice";
 
 describe('counter reducer', () => {
     it('should handle initial state', () => {
@@ -6,8 +6,9 @@ describe('counter reducer', () => {
             counterReducer(
                 undefined,
                 { type: "" }
-            ))
-            .toEqual({ value: 0 })
+            )
+        )
+            .toEqual({ value: 0 });
     });
 
     it('should handle increment', () => {
@@ -16,7 +17,8 @@ describe('counter reducer', () => {
                 { value: 1 },
                 increment()
             )
-        ).toEqual({ value: 2 });
+        )
+            .toEqual({ value: 2 })
     });
 
     it('should handle decrement', () => {
@@ -25,16 +27,37 @@ describe('counter reducer', () => {
                 { value: 1 },
                 decrement()
             )
-        ).toEqual({ value: 0 });
+        )
+            .toEqual({ value: 0 })
     });
 
-     it('should handle incrementByAmount', () => {
+    it('should handle incrementByAmount', () => {
         expect(
             counterReducer(
                 { value: 1 },
                 incrementByAmount(5)
             )
-        ).toEqual({ value: 6 });
+        )
+            .toEqual({ value: 6 })
     });
 
+    it('should handle decrement below zero', () => {
+        expect(
+            counterReducer(
+                { value: 0 },
+                decrement()
+            )
+        )
+            .toEqual({ value: -1 });
+    });
+
+    it('should handle incrementByAmount with negative value', () => {
+        expect(
+            counterReducer(
+                { value: 10 },
+                incrementByAmount(-3)
+            )
+        )
+            .toEqual({ value: 7 });
+    });
 });

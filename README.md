@@ -1,51 +1,17 @@
-# React Tutorial Project
+# React + TypeScript + Vite
 
-Welcome! This project is designed to help you learn modern React development using TypeScript and Vite. If you're following along with my tutorial video, this README contains everything you need to understand and run the code.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## What You'll Learn
+Currently, two official plugins are available:
 
-- **State Management:** Learn how to manage component state using React's `useState` and more advanced patterns.
-- **Context:** See how to share data across your app using React Context.
-- **Hooks:** Discover custom and built-in hooks for reusable logic.
-- **Reducers:** Use `useReducer` for complex state logic.
-- **Automated Tests:** Explore how to write and run automated tests for your React components.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Project Structure
+## Expanding the ESLint configuration
 
-- `src/` — Main source code for the app
-- `src/context/` — Context providers and consumers
-- `src/hooks/` — Custom React hooks
-- `src/reducers/` — Reducer functions and related logic
-- `src/__tests__/` — Automated tests ([Vitest](https://vitest.dev/))
-- `public/` — Static assets
-- `vite.config.ts` — Vite configuration
-- `eslint.config.js` — ESLint configuration for code quality
-
-## Getting Started
-
-1. **Install dependencies:**
-   ```sh
-   npm install
-   ```
-2. **Run the development server:**
-   ```sh
-   npm run dev
-   ```
-3. **Run automated tests:**
-   ```sh
-   npm test
-   ```
-4. **Lint your code:**
-   ```sh
-   npm run lint
-   ```
-
-## ESLint & TypeScript
-
-This project uses ESLint with TypeScript for code quality. For production apps, enable type-aware lint rules as shown below:
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
 ```js
-// eslint.config.js
 export default tseslint.config([
   globalIgnores(['dist']),
   {
@@ -73,7 +39,7 @@ export default tseslint.config([
 ])
 ```
 
-For React-specific lint rules, install these plugins:
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
@@ -101,14 +67,3 @@ export default tseslint.config([
   },
 ])
 ```
-
-## Useful Links
-
-- [React Documentation](https://react.dev/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-- [Vite Documentation](https://vitejs.dev/)
-- [Jest](https://jestjs.io/) / [Vitest](https://vitest.dev/)
-
----
-
-If you have any questions, feel free to leave a comment or reach out for help. Happy coding!
